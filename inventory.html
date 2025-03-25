@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory - UW Xiao Lab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #4b2e83;
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #fff;
+    }
+    header p {
+      margin: 0 0 0 20px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    nav {
+      background: #444;
+      color: #fff;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .inventory-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .inventory-table th, .inventory-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    .inventory-table th {
+      background-color: #0077b6;
+      color: white;
+    }
+    .inventory-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .low-stock {
+      background-color: #ffdddd !important;
+    }
+    .alert-banner {
+      background-color: #FFEBEE;
+      border-left: 4px solid #F44336;
+      padding: 12px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .alert-btn {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+    .alert-btn:hover {
+      background-color: #005b8c;
+    }
+    footer {
+      background: #85754d;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Xiao Lab</h1>
+    <p>Department of Mechanical Engineering, University of Washington</p>
+  </header>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="research.html">Research</a>
+    <a href="team.html">Team</a>
+    <a href="publications.html">Publications</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="container">
+    <h2>Lab Inventory Management</h2>
+    
+    <!-- Low Inventory Alert Banner -->
+    <div class="alert-banner" id="inventory-alert">
+      ⚠️ <strong>Low Inventory Alert:</strong> 
+      <span id="alert-message">Lithium Hexafluorophosphate (LiPF6) is low (15g remaining)</span>
+      <button class="alert-btn" onclick="sendAlert()">Email Lab Manager</button>
+    </div>
+
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Minimum</th>
+          <th>Location</th>
+          <th>Responsible</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Glove Box (MBraun)</td>
+          <td>Equipment</td>
+          <td>2</td>
+          <td>-</td>
+          <td>Room 312</td>
+          <td>Simon Danitz</td>
+          <td>-</td>
+        </tr>
+        <tr class="low-stock">
+          <td>Lithium Hexafluorophosphate (LiPF6)</td>
+          <td>Chemical</td>
+          <td>15g</td>
+          <td>50g</td>
+          <td>Cabinet B2</td>
+          <td>Qixuan Jiang</td>
+          <td><button onclick="sendSpecificAlert('LiPF6', 15, 50)">Alert</button></td>
+        </tr>
+        <tr>
+          <td>Electrochemical Workstation</td>
+          <td>Equipment</td>
+          <td>1</td>
+          <td>-</td>
+          <td>Room 310</td>
+          <td>Yuchen Ji</td>
+          <td>-</td>
+        </tr>
+        <tr class="low-stock">
+          <td>N-Methyl-2-pyrrolidone (NMP)</td>
+          <td>Chemical</td>
+          <td>200ml</td>
+          <td>500ml</td>
+          <td>Chemical Storage</td>
+          <td>Shineui Hwang</td>
+          <td><button onclick="sendSpecificAlert('NMP', 200, 500)">Alert</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Xiao Labs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Replace with your actual FormSubmit.co endpoint
+    const FORM_SUBMIT_URL = "https://formsubmit.co/ajax/your-lab-email@uw.edu";
+    
+    function sendAlert() {
+      const message = document.getElementById("alert-message").innerText;
+      
+      fetch(FORM_SUBMIT_URL, {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: "⚠️ LOW INVENTORY ALERT",
+          message: message,
+          _replyto: "inventory@uw.edu"
+        })
+      })
+      .then(response => alert("Alert sent to lab manager!"))
+      .catch(error => alert("Error: Email not sent. Please try again later."));
+    }
+
+    function sendSpecificAlert(item, current, min) {
+      const message = `URGENT: Only ${current} remaining of ${item} (Minimum: ${min})`;
+      document.getElementById("alert-message").innerText = message;
+      sendAlert();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - UW Xiao Lab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #4b2e83; /* UW purple */
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0; 
+      font-size: 2rem;
+      color: #fff; 
+    }
+    header p {
+      margin: 0 0 0 20px; 
+      font-size: 1.2rem; 
+      color: #b7a57a; /* UW gold */ 
+    }
+    nav {
+      background: #85754d; /* UW darker gold */
+      color: #fff;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Slideshow Styles */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+    }
+    .slide img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      background-color: rgba(0,0,0,0.3);
+    }
+    .next {
+      right: 0;
+    }
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    .dot-container {
+      text-align: center;
+      padding: 20px;
+    }
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    .active, .dot:hover {
+      background-color: #4b2e83; /* UW purple */
+    }
+    
+    /* Research Icons */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .research-icon {
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .research-icon:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .research-icon img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+    .research-icon h3 {
+      color: #4b2e83; /* UW purple */
+    }
+    
+    footer {
+      background: #85754d; /* UW darker gold */
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Xiao Lab</h1>
+    <p>Department of Mechanical Engineering, University of Washington</p>
+  </header>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="research.html">Research</a>
+    <a href="team.html">Team</a>
+    <a href="publications.html">Publications</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- Slideshow Container -->
+  <div class="slideshow-container">
+    <div class="slide fade">
+      <img src="images/lab-equipment.jpg" alt="Lab Equipment">
+    </div>
+    <div class="slide fade">
+      <img src="images/team-meeting.jpg" alt="Team Meeting">
+    </div>
+    <div class="slide fade">
+      <img src="images/battery-research.jpg" alt="Battery Research">
+    </div>
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  
+  <div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span> 
+  </div>
+
+  <div class="container">
+    <h2>Welcome to Our Research Group</h2>
+    <p>Dr. Xiao has been leading research thrusts in both fundamental research and practical 
+       applications of energy storage materials and systems to accelerate deep decarbonization. 
+       Dr. Xiao's research has led to breakthroughs in long cycling next-generation high energy 
+       lithium metal batteries and novel battery materials, accelerating the process to establish 
+       domestic manufacturing capability for clean energy technologies.</p>
+    
+    <!-- Research Icons Grid -->
+    <div class="research-grid">
+      <div class="research-icon" onclick="window.location.href='research.html#electrochemical'">
+        <img src="images/electrochem-icon.png" alt="Electrochemical Process">
+        <h3>Electrochemical Winning Process</h3>
+        <p>Innovative metal extraction techniques</p>
+      </div>
+      
+      <div class="research-icon" onclick="window.location.href='research.html#materials'">
+        <img src="images/materials-icon.png" alt="Energy Materials">
+        <h3>Energy-Bearing Materials</h3>
+        <p>Advanced materials synthesis and scaling</p>
+      </div>
+      
+      <div class="research-icon" onclick="window.location.href='research.html#battery'">
+        <img src="images/battery-icon.png" alt="Battery Tech">
+        <h3>Advanced Battery Tech</h3>
+        <p>Next-generation battery systems</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Xiao Labs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Slideshow functionality
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slide");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    
+    // Auto-advance slides every 5 seconds
+    setInterval(() => plusSlides(1), 5000);
+  </script>
+</body>
+</html>
